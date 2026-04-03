@@ -585,7 +585,7 @@
             document.getElementById('char-now').textContent = '0';
             showToast('✅ 등록됐어요!', 'success');
 
-            setTimeout(loadPosts, 1200);
+            renderPosts([...posts, newPost]);
 
         } catch (e) {
             showToast(`등록 실패: ${e.message}`, 'error');
