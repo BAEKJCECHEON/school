@@ -459,7 +459,8 @@
         if (res.status === 404) return {posts: [], sha: null};
         if (!res.ok) throw new Error(`읽기 실패 (${res.status})`);
         const data = await res.json();
-        const posts = JSON.parse(fromBase64(data.content));
+        // base64 디코딩 후 바로 JSON 파싱
+        const posts = JSON.parse(atob(data.content.replace(/\n/g, '')));
         return {posts, sha: data.sha};
     }
 
