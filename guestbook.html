@@ -475,7 +475,7 @@
     async function writeFile(posts, sha) {
         const body = {
             message: `방명록 업데이트`,
-            content: btoa(unescape(encodeURIComponent(JSON.stringify(posts, null, 2)))),
+            content: btoa(String.fromCharCode(...new TextEncoder().encode(JSON.stringify(posts, null, 2)))),
             ...(sha ? {sha} : {}),
         };
 
