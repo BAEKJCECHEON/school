@@ -394,7 +394,7 @@
 <header>
     <p class="label">Staff Board</p>
     <h1>방명록</h1>
-    <p class="desc">선생님들끼리 가볍게 한마디 남겨요 ✏️</p>
+    <p class="desc">방명록을 남기자 ✏️</p>
 </header>
 
 <a class="back-link" href="index.html">← 급식 메뉴로</a>
@@ -467,7 +467,7 @@
         if (!res.ok) throw new Error(`읽기 실패 (${res.status})`);
 
         const data = await res.json();
-        const posts = JSON.parse(atob(data.content.replace(/\n/g, '')));
+        const posts = JSON.parse(decodeURIComponent(atob(data.content.replace(/\n/g, '')).split('').map(c => '%' + c.charCodeAt(0).toString(16).padStart(2, '0')).join('')));
         return {posts, sha: data.sha};
     }
 
@@ -475,7 +475,7 @@
     async function writeFile(posts, sha) {
         const body = {
             message: `방명록 업데이트`,
-            content: btoa(String.fromCharCode(...new TextEncoder().encode(JSON.stringify(posts, null, 2)))),
+            content: btoa(encodeURIComponent(JSON.stringify(posts, null, 2)).replace(/%([0-9A-F]{2})/g, (_, p1) => String.fromCharCode('0x' + p1))),
             ...(sha ? {sha} : {}),
         };
 
