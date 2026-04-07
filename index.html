@@ -543,12 +543,47 @@
             opacity: .6;
             animation: fadeUp .6s .4s ease both;
         }
+
+        .nav-bar {
+            display: flex;
+            gap: 8px;
+            margin-bottom: 36px;
+            animation: fadeDown .6s ease both;
+        }
+
+        .nav-btn {
+            font-family: var(--font);
+            font-size: 12px;
+            font-weight: 500;
+            text-decoration: none;
+            padding: 8px 18px;
+            border-radius: 100px;
+            border: 1px solid var(--border);
+            background: var(--surface);
+            color: var(--text-muted);
+            transition: color .2s, border-color .2s, background .2s;
+        }
+
+        .nav-btn:hover {
+            color: var(--accent);
+            border-color: var(--accent);
+            background: rgba(92, 124, 250, .08);
+        }
+
+        .nav-btn.active {
+            color: var(--accent);
+            border-color: var(--accent);
+            background: rgba(92, 124, 250, .12);
+        }
     </style>
 </head>
 
 <body>
 
-
+<nav class="nav-bar">
+    <a href="index.html" class="nav-btn active">🍱 급식</a>
+    <a href="fortune.html" class="nav-btn">🔮 운세</a>
+</nav>
 <header>
     <p class="label">School Meal Planner</p>
     <h1>오늘의 급식</h1>
