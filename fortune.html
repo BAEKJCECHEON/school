@@ -36,7 +36,9 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding: 28px 16px 80px;
+            padding: 24px 16px 80px;
+            width: 100%;
+            overflow-x: hidden;
         }
 
         /* 네비 */
@@ -90,7 +92,7 @@
 
         header h1 {
             font-family: 'Playfair Display', serif;
-            font-size: clamp(2rem, 6vw, 3rem);
+            font-size: clamp(2.2rem, 10vw, 3rem);
             font-weight: 700;
             color: #fff;
             line-height: 1.1;
@@ -103,7 +105,7 @@
             background: var(--surface);
             border: 1px solid var(--border);
             border-radius: var(--radius);
-            padding: 28px 24px;
+            padding: 24px 20px;
             box-shadow: var(--shadow);
             animation: fadeUp .6s .2s ease both;
         }
@@ -117,17 +119,18 @@
 
         .input-row {
             display: flex;
+            flex-direction: column;
             gap: 10px;
         }
 
         .input-row input {
-            flex: 1;
+            width: 100%;
             background: var(--surface2);
             border: 1px solid var(--border);
             border-radius: 12px;
-            padding: 12px 16px;
+            padding: 14px 16px;
             font-family: var(--font);
-            font-size: 14px;
+            font-size: 16px;
             color: var(--text);
             outline: none;
             transition: border-color .2s;
@@ -142,22 +145,22 @@
         }
 
         .input-row button {
+            width: 100%;
             background: var(--accent);
             border: none;
             border-radius: 12px;
-            padding: 12px 20px;
+            padding: 14px 20px;
             font-family: var(--font);
-            font-size: 14px;
-            font-weight: 500;
+            font-size: 15px;
+            font-weight: 700;
             color: #fff;
             cursor: pointer;
-            white-space: nowrap;
             transition: opacity .2s, transform .15s;
+            -webkit-tap-highlight-color: transparent;
         }
 
         .input-row button:hover {
             opacity: .85;
-            transform: translateY(-1px);
         }
 
         .input-row button:active {
@@ -182,7 +185,7 @@
             background: var(--surface);
             border: 1px solid var(--border);
             border-radius: var(--radius);
-            padding: 24px;
+            padding: 20px;
             box-shadow: var(--shadow);
         }
 
@@ -247,10 +250,10 @@
             background: var(--surface);
             border: 1px solid var(--border);
             border-radius: var(--radius);
-            padding: 22px 24px;
+            padding: 20px;
             box-shadow: var(--shadow);
             font-size: 15px;
-            line-height: 1.8;
+            line-height: 1.85;
             color: var(--text);
         }
 
@@ -258,10 +261,10 @@
             background: var(--surface);
             border: 1px solid var(--border);
             border-radius: var(--radius);
-            padding: 18px 24px;
+            padding: 16px 20px;
             box-shadow: var(--shadow);
             display: flex;
-            gap: 10px;
+            gap: 8px;
             flex-wrap: wrap;
         }
 
@@ -283,14 +286,15 @@
             background: none;
             border: 1px solid var(--border);
             color: var(--text-muted);
-            padding: 10px 24px;
+            padding: 13px 24px;
             border-radius: 100px;
             font-family: var(--font);
-            font-size: 12px;
+            font-size: 13px;
             cursor: pointer;
             align-self: center;
             transition: border-color .2s, color .2s;
             margin-top: 4px;
+            -webkit-tap-highlight-color: transparent;
         }
 
         .reset-btn:hover {
@@ -333,8 +337,8 @@
 <body>
 
 <nav class="nav-bar">
-    <a href="index.html" class="nav-btn">급식</a>
-    <a href="fortune.html" class="nav-btn active">운세</a>
+    <a href="index.html" class="nav-btn">🍱 급식</a>
+    <a href="fortune.html" class="nav-btn active">🔮 운세</a>
 </nav>
 
 <header>
@@ -344,7 +348,7 @@
 
 <!-- 이름 입력 -->
 <div class="input-wrap" id="input-wrap">
-    <p>이름이나 닉네임을 입력하면 오늘의 운세를 확인할 수 있어요.</p>
+    <p>이름이나 닉네임을 입력하면 오늘의 운세를 확인할 수 있어요.<br>같은 이름이라도 날마다 다른 운세가 나와요. 하루에 한 번만 열람 가능해요.</p>
     <div class="input-row">
         <input type="text" id="name-input" placeholder="이름 또는 닉네임" maxlength="20"/>
         <button onclick="checkFortune()">운세 보기</button>
@@ -368,7 +372,7 @@
     <button class="reset-btn" onclick="resetFortune()">다른 이름으로 보기</button>
 </div>
 
-<footer>오늘의 운세</footer>
+<footer>운세는 재미로만 봐주세요 🌟</footer>
 
 <script>
     const FORTUNES = [
@@ -680,8 +684,8 @@
     });
 
     // 마지막 이름 자동 입력
-    const lastName = localStorage.getItem('fortune_last_name');
-    if (lastName) document.getElementById('name-input').value = lastName;
+    //const lastName = localStorage.getItem('fortune_last_name');
+    //if (lastName) document.getElementById('name-input').value = lastName;
 </script>
 </body>
 </html>
