@@ -387,9 +387,7 @@
 
     /* ── KST(한국 표준시, UTC+9) 기준 날짜 헬퍼 ── */
     function kstDate() {
-        const now = new Date();
-        // UTC 시각에 9시간을 더해 KST로 변환
-        return new Date(now.getTime() + 9 * 60 * 60 * 1000);
+        return new Date(Date.now() + 9 * 60 * 60 * 1000);
     }
 
     function todayStr() {
@@ -424,7 +422,7 @@
         return Math.abs(h);
     }
 
-    /* ── 운세 생성 ── */
+    /* ── 운세 생성 (이름 + KST 날짜로 시드) ── */
     function generateFortune(name) {
         const seed = hashStr(name) ^ todayStr();
         const rng = seeded(seed);
@@ -435,10 +433,6 @@
             num: LUCKY_NUMS[Math.floor(rng() * LUCKY_NUMS.length)],
             dir: LUCKY_DIRS[Math.floor(rng() * LUCKY_DIRS.length)],
         };
-    }
-
-    function storageKey(name) {
-        return 'fortune_v2_' + name + '_' + todayStr();
     }
 
     /* ── 운세 확인 ── */
@@ -452,15 +446,7 @@
             alert('운세 데이터를 불러오는 중이에요. 잠시 후 다시 시도해주세요.');
             return;
         }
-
-        localStorage.setItem('fortune_last_name', name);
-
-        const key = storageKey(name);
-        const stored = localStorage.getItem(key);
-        const data = stored ? JSON.parse(stored) : generateFortune(name);
-        if (!stored) localStorage.setItem(key, JSON.stringify(data));
-
-        renderFortune(name, data);
+        renderFortune(name, generateFortune(name));
     }
 
     /* ── 카드 렌더링 ── */
