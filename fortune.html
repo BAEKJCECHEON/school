@@ -288,8 +288,8 @@
             font-size: 13px;
             cursor: pointer;
             align-self: center;
-            transition: border-color .2s, color .2s;
             margin-top: 4px;
+            transition: border-color .2s, color .2s;
             -webkit-tap-highlight-color: transparent;
         }
 
@@ -308,13 +308,25 @@
         }
 
         @keyframes fadeDown {
-            from { opacity: 0; transform: translateY(-18px); }
-            to   { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(-18px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
 
         @keyframes fadeUp {
-            from { opacity: 0; transform: translateY(18px); }
-            to   { opacity: 1; transform: translateY(0); }
+            from {
+                opacity: 0;
+                transform: translateY(18px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
         }
     </style>
 </head>
@@ -330,7 +342,6 @@
     <h1>오늘의 운세</h1>
 </header>
 
-<!-- 이름 입력 -->
 <div class="input-wrap" id="input-wrap">
     <p>이름을 입력하고 오늘의 운세를 확인하세요</p>
     <div class="input-row">
@@ -339,7 +350,6 @@
     </div>
 </div>
 
-<!-- 운세 카드 -->
 <div class="fortune-card" id="fortune-card">
     <div class="card-top">
         <div class="card-user">
@@ -359,18 +369,44 @@
 <footer>재미로 보는 오늘의 운세</footer>
 
 <script>
-    // fortunes.json을 페이지 로드 시 한 번만 fetch
     let FORTUNES = [];
     fetch('fortunes.json')
         .then(r => r.json())
-        .then(data => { FORTUNES = data; })
-        .catch(() => { FORTUNES = ["오늘도 좋은 하루 되세요!"]; });
+        .then(data => {
+            FORTUNES = data;
+        })
+        .catch(() => {
+            FORTUNES = ["오늘도 좋은 하루 되세요!"];
+        });
 
-    const SCORE_LABELS  = ["전체운", "학업운", "대인운", "건강운"];
-    const SCORE_COLORS  = ["#5c7cfa", "#f06595", "#51cf66", "#ff9f43"];
-    const LUCKY_COLORS  = ["빨강", "파랑", "초록", "노랑", "보라", "주황", "하늘색", "분홍", "흰색", "검정"];
-    const LUCKY_NUMS    = [1,2,3,4,5,6,7,8,9,10,11,12,13,14,15,17,19,21,23,25,27,31,37,42,77,88,99];
-    const LUCKY_DIRS    = ["동쪽", "서쪽", "남쪽", "북쪽", "동남쪽", "북서쪽"];
+    const SCORE_LABELS = ["전체운", "학업운", "대인운", "건강운"];
+    const SCORE_COLORS = ["#5c7cfa", "#f06595", "#51cf66", "#ff9f43"];
+    const LUCKY_COLORS = ["빨강", "파랑", "초록", "노랑", "보라", "주황", "하늘색", "분홍", "흰색", "검정"];
+    const LUCKY_NUMS = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 17, 19, 21, 23, 25, 27, 31, 37, 42, 77, 88, 99];
+    const LUCKY_DIRS = ["동쪽", "서쪽", "남쪽", "북쪽", "동남쪽", "북서쪽"];
+
+    /* ── KST(한국 표준시, UTC+9) 기준 날짜 헬퍼 ── */
+    function kstDate() {
+        const now = new Date();
+        // UTC 시각에 9시간을 더해 KST로 변환
+        return new Date(now.getTime() + 9 * 60 * 60 * 1000);
+    }
+
+    function todayStr() {
+        const kst = kstDate();
+        return kst.getUTCFullYear() * 10000
+            + (kst.getUTCMonth() + 1) * 100
+            + kst.getUTCDate();
+    }
+
+    function todayLabel() {
+        const kst = kstDate();
+        const days = ['일', '월', '화', '수', '목', '금', '토'];
+        return kst.getUTCFullYear() + '년 '
+            + (kst.getUTCMonth() + 1) + '월 '
+            + kst.getUTCDate() + '일 '
+            + days[kst.getUTCDay()] + '요일';
+    }
 
     /* ── 시드 기반 RNG ── */
     function seeded(seed) {
@@ -388,37 +424,19 @@
         return Math.abs(h);
     }
 
-    /* ── 날짜 헬퍼 ── */
-    function todayStr() {
-        const d = new Date();
-        // YYYYMMDD 형태로 날짜마다 고유한 숫자
-        return d.getFullYear() * 10000
-             + (d.getMonth() + 1) * 100
-             + d.getDate();
-    }
-
-    function todayLabel() {
-        const d = new Date();
-        const days = ['일','월','화','수','목','금','토'];
-        return d.getFullYear() + '년 ' + (d.getMonth()+1) + '월 ' + d.getDate() + '일 ' + days[d.getDay()] + '요일';
-    }
-
-    /* ── 운세 생성 (이름 + 날짜 조합으로 시드) ── */
+    /* ── 운세 생성 ── */
     function generateFortune(name) {
-        // 이름 해시와 오늘 날짜를 XOR → 날짜가 바뀌면 시드가 완전히 달라짐
         const seed = hashStr(name) ^ todayStr();
-        const rng  = seeded(seed);
-
+        const rng = seeded(seed);
         return {
-            text:   FORTUNES[Math.floor(rng() * FORTUNES.length)],
+            text: FORTUNES[Math.floor(rng() * FORTUNES.length)],
             scores: SCORE_LABELS.map(() => Math.floor(rng() * 91) + 10),
-            color:  LUCKY_COLORS[Math.floor(rng() * LUCKY_COLORS.length)],
-            num:    LUCKY_NUMS[Math.floor(rng() * LUCKY_NUMS.length)],
-            dir:    LUCKY_DIRS[Math.floor(rng() * LUCKY_DIRS.length)],
+            color: LUCKY_COLORS[Math.floor(rng() * LUCKY_COLORS.length)],
+            num: LUCKY_NUMS[Math.floor(rng() * LUCKY_NUMS.length)],
+            dir: LUCKY_DIRS[Math.floor(rng() * LUCKY_DIRS.length)],
         };
     }
 
-    /* ── localStorage 키: 이름 + 날짜 포함 → 날짜 바뀌면 자동으로 새 키 ── */
     function storageKey(name) {
         return 'fortune_v2_' + name + '_' + todayStr();
     }
@@ -426,15 +444,20 @@
     /* ── 운세 확인 ── */
     function checkFortune() {
         const name = document.getElementById('name-input').value.trim();
-        if (!name) { alert('이름을 입력해주세요!'); return; }
-        if (!FORTUNES.length) { alert('운세 데이터를 불러오는 중이에요. 잠시 후 다시 시도해주세요.'); return; }
+        if (!name) {
+            alert('이름을 입력해주세요!');
+            return;
+        }
+        if (!FORTUNES.length) {
+            alert('운세 데이터를 불러오는 중이에요. 잠시 후 다시 시도해주세요.');
+            return;
+        }
 
         localStorage.setItem('fortune_last_name', name);
 
-        // 오늘 이미 조회했으면 캐시 사용, 아니면 새로 생성
-        const key    = storageKey(name);
+        const key = storageKey(name);
         const stored = localStorage.getItem(key);
-        const data   = stored ? JSON.parse(stored) : generateFortune(name);
+        const data = stored ? JSON.parse(stored) : generateFortune(name);
         if (!stored) localStorage.setItem(key, JSON.stringify(data));
 
         renderFortune(name, data);
@@ -443,15 +466,15 @@
     /* ── 카드 렌더링 ── */
     function renderFortune(name, data) {
         document.getElementById('input-wrap').style.display = 'none';
-        document.getElementById('f-name').textContent  = name + '님의 오늘 운세';
-        document.getElementById('f-date').textContent  = todayLabel();
-        document.getElementById('f-scores').innerHTML  = data.scores.map((s, i) => `
+        document.getElementById('f-name').textContent = name + '님의 오늘 운세';
+        document.getElementById('f-date').textContent = todayLabel();
+        document.getElementById('f-scores').innerHTML = data.scores.map((s, i) => `
             <div class="score-box">
                 <div class="score-label">${SCORE_LABELS[i]}</div>
                 <div class="score-val" style="color:${SCORE_COLORS[i]}">${s}</div>
             </div>`).join('');
-        document.getElementById('f-text').textContent  = data.text;
-        document.getElementById('f-lucky').innerHTML   = `
+        document.getElementById('f-text').textContent = data.text;
+        document.getElementById('f-lucky').innerHTML = `
             <div class="lucky-item">행운색 <span>${data.color}</span></div>
             <div class="lucky-item">행운번호 <span>${data.num}</span></div>
             <div class="lucky-item">행운방향 <span>${data.dir}</span></div>`;
