@@ -284,7 +284,7 @@
     <p>드래그해서 합이 <strong style="color:var(--accent)">10</strong>이 되는 사과들을 선택하세요!</p>
     <ul class="rule-list">
         <li><span>🖱️</span> 마우스 또는 손가락으로 드래그</li>
-        <li><span>🔢</span> 합이 10이면 터짐</li>
+        <li><span>🔢</span> 몇 개든 합이 10이면 터짐 (1+9, 5+5, 7+1+1+1 등)</li>
         <li><span>⏱️</span> 제한 시간 120초</li>
         <li><span>🏆</span> 많이 터트릴수록 고득점!</li>
     </ul>
@@ -325,7 +325,7 @@
 
 <button class="btn-reset-inline" id="btn-reset" onclick="initGame()" style="margin-top:16px;display:none;">↺ 새 게임</button>
 
-<footer>합이 10이 되도록 드래그하세요</footer>
+<footer>합이 10이 되도록 드래그하세요 • 몇 개든 OK!</footer>
 
 <script>
 const COLS = 17, ROWS = 10;
@@ -370,6 +370,7 @@ function startGame() {
     document.getElementById('hud').style.display = 'flex';
     document.getElementById('timer-wrap').style.display = 'block';
     document.getElementById('msg').style.display = 'block';
+    document.getElementById('board-wrap').style.display = 'block';
     document.getElementById('btn-reset').style.display = '';
     initGame();
 }
@@ -388,6 +389,11 @@ function initGame() {
     document.getElementById('timer-bar').style.background = 'var(--accent)';
     document.getElementById('msg').textContent = '드래그해서 합이 10이 되는 사과를 선택하세요!';
     document.getElementById('game-over').style.display = 'none';
+
+    /* 게임오버 후 재시작 시 이 요소들이 숨겨져 있을 수 있으므로 다시 표시 */
+    document.getElementById('hud').style.display = 'flex';
+    document.getElementById('timer-wrap').style.display = 'block';
+    document.getElementById('msg').style.display = 'block';
     document.getElementById('board-wrap').style.display = 'block';
     document.getElementById('btn-reset').style.display = '';
 
@@ -591,7 +597,7 @@ function tryPop() {
         poppedCount += sel.length;
         document.getElementById('score').textContent = score;
         document.getElementById('popped').textContent = poppedCount;
-        document.getElementById('msg').textContent = `${sel.length * 10}점! (${sel.map(a=>a.val).join('+')}=10)`;
+        document.getElementById('msg').textContent = `🍎 +${sel.length * 10}점! (${sel.map(a=>a.val).join('+')}=10)`;
         requestAnimationFrame(draw);
 
         /* check if all gone */
@@ -628,5 +634,6 @@ function endGame() {
 }
 
 // game starts when user clicks 시작하기
+</script>
 </body>
 </html>

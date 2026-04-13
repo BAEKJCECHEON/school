@@ -424,17 +424,28 @@
     }
 
     /* ── 운세 생성 (이름 + KST 날짜로 시드) ── */
-    function generateFortune(name) {
-        const seed = hashStr(name) ^ todayStr();
-        const rng = seeded(seed);
-        return {
-            text: FORTUNES[Math.floor(rng() * FORTUNES.length)],
-            scores: SCORE_LABELS.map(() => Math.floor(rng() * 91) + 10),
-            color: LUCKY_COLORS[Math.floor(rng() * LUCKY_COLORS.length)],
-            num: LUCKY_NUMS[Math.floor(rng() * LUCKY_NUMS.length)],
-            dir: LUCKY_DIRS[Math.floor(rng() * LUCKY_DIRS.length)],
-        };
-    }
+function generateFortune(name) {
+    const seed = hashStr(name) ^ todayStr();
+    const rng = seeded(seed);
+
+    const text = FORTUNES[Math.floor(rng() * FORTUNES.length)];
+
+    // 기준 점수 하나를 뽑고, 나머지는 ±15 범위 안에서 뽑기
+    const base = Math.floor(rng() * 71) + 20; // 20~90
+    const scores = SCORE_LABELS.map((_, i) => {
+        if (i === 0) return base; // 전체운 = 기준
+        const offset = Math.floor(rng() * 31) - 15; // -15 ~ +15
+        return Math.min(99, Math.max(10, base + offset));
+    });
+
+    return {
+        text,
+        scores,
+        color: LUCKY_COLORS[Math.floor(rng() * LUCKY_COLORS.length)],
+        num: LUCKY_NUMS[Math.floor(rng() * LUCKY_NUMS.length)],
+        dir: LUCKY_DIRS[Math.floor(rng() * LUCKY_DIRS.length)],
+    };
+}
 
     /* ── 운세 확인 ── */
     function checkFortune() {
