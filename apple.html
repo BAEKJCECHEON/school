@@ -130,6 +130,15 @@
             animation: fadeUp .6s .25s ease both;
             touch-action: none;
             cursor: crosshair;
+            -webkit-user-select: none;
+            user-select: none;
+        }
+
+        /* 게임 중 전체 페이지 스크롤 막기 */
+        body.playing {
+            overflow: hidden;
+            position: fixed;
+            width: 100%;
         }
 
         #game-canvas {
@@ -372,6 +381,7 @@ function startGame() {
     document.getElementById('msg').style.display = 'block';
     document.getElementById('board-wrap').style.display = 'block';
     document.getElementById('btn-reset').style.display = '';
+    document.body.classList.add('playing');
     initGame();
 }
 
@@ -396,6 +406,7 @@ function initGame() {
     document.getElementById('msg').style.display = 'block';
     document.getElementById('board-wrap').style.display = 'block';
     document.getElementById('btn-reset').style.display = '';
+    document.body.classList.add('playing');
 
     apples = [];
     for (let r = 0; r < ROWS; r++)
@@ -597,7 +608,7 @@ function tryPop() {
         poppedCount += sel.length;
         document.getElementById('score').textContent = score;
         document.getElementById('popped').textContent = poppedCount;
-        document.getElementById('msg').textContent = `🍎 +${sel.length * 10}점! (${sel.map(a=>a.val).join('+')}=10)`;
+        document.getElementById('msg').textContent = `${sel.length * 10}점! (${sel.map(a=>a.val).join('+')}=10)`;
         requestAnimationFrame(draw);
 
         /* check if all gone */
@@ -625,6 +636,7 @@ function endGame() {
     clearInterval(timerInterval);
     gameActive = false;
     isDragging = false;
+    document.body.classList.remove('playing');
     draw();
     document.getElementById('board-wrap').style.display = 'none';
     document.getElementById('btn-reset').style.display = 'none';
