@@ -5,8 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>사과 게임</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=Playfair+Display:wght@700&display=swap"
-          rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;700&family=Playfair+Display:wght@700&display=swap" rel="stylesheet">
     <style>
         :root {
             --bg: #0f1117;
@@ -17,16 +16,11 @@
             --accent2: #f06595;
             --text: #e8ecf4;
             --text-muted: #7880a0;
-            --shadow: 0 8px 40px rgba(0, 0, 0, 0.5);
+            --shadow: 0 8px 40px rgba(0,0,0,0.5);
             --radius: 18px;
             --font: 'Noto Sans KR', sans-serif;
         }
-
-        * {
-            box-sizing: border-box;
-            margin: 0;
-            padding: 0;
-        }
+        * { box-sizing: border-box; margin: 0; padding: 0; }
 
         body {
             font-family: var(--font);
@@ -46,7 +40,6 @@
             margin-bottom: 36px;
             animation: fadeDown .6s ease both;
         }
-
         .nav-btn {
             font-family: var(--font);
             font-size: 12px;
@@ -59,25 +52,14 @@
             color: var(--text-muted);
             transition: color .2s, border-color .2s, background .2s;
         }
-
-        .nav-btn:hover {
-            color: var(--accent);
-            border-color: var(--accent);
-            background: rgba(92, 124, 250, .08);
-        }
-
-        .nav-btn.active {
-            color: var(--accent);
-            border-color: var(--accent);
-            background: rgba(92, 124, 250, .12);
-        }
+        .nav-btn:hover { color: var(--accent); border-color: var(--accent); background: rgba(92,124,250,.08); }
+        .nav-btn.active { color: var(--accent); border-color: var(--accent); background: rgba(92,124,250,.12); }
 
         header {
             text-align: center;
             margin-bottom: 28px;
             animation: fadeDown .6s ease both;
         }
-
         header .label {
             font-size: 11px;
             letter-spacing: 4px;
@@ -85,7 +67,6 @@
             color: var(--accent);
             margin-bottom: 10px;
         }
-
         header h1 {
             font-family: 'Playfair Display', serif;
             font-size: clamp(2rem, 6vw, 3rem);
@@ -109,32 +90,10 @@
             flex-wrap: wrap;
             justify-content: center;
         }
-
-        .hud-stat {
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-
-        .hud-label {
-            font-size: 10px;
-            color: var(--text-muted);
-            letter-spacing: 1px;
-            text-transform: uppercase;
-        }
-
-        .hud-val {
-            font-size: 22px;
-            font-weight: 700;
-            color: var(--text);
-            line-height: 1.2;
-        }
-
-        .hud-sep {
-            width: 1px;
-            height: 32px;
-            background: var(--border);
-        }
+        .hud-stat { display: flex; flex-direction: column; align-items: center; }
+        .hud-label { font-size: 10px; color: var(--text-muted); letter-spacing: 1px; text-transform: uppercase; }
+        .hud-val { font-size: 22px; font-weight: 700; color: var(--text); line-height: 1.2; }
+        .hud-sep { width: 1px; height: 32px; background: var(--border); }
 
         /* Timer bar */
         .timer-wrap {
@@ -147,7 +106,6 @@
             overflow: hidden;
             animation: fadeDown .6s .15s ease both;
         }
-
         #timer-bar {
             height: 100%;
             border-radius: 4px;
@@ -183,7 +141,7 @@
         #sel-rect {
             position: absolute;
             border: 2px solid var(--accent);
-            background: rgba(92, 124, 250, .12);
+            background: rgba(92,124,250,.12);
             border-radius: 4px;
             pointer-events: none;
             display: none;
@@ -205,23 +163,9 @@
             max-width: 560px;
             text-align: center;
         }
-
-        #game-over h2 {
-            font-family: 'Playfair Display', serif;
-            font-size: 28px;
-            color: #fff;
-        }
-
-        #game-over .go-score {
-            font-size: 48px;
-            font-weight: 700;
-            color: var(--accent);
-        }
-
-        #game-over p {
-            color: var(--text-muted);
-            font-size: 14px;
-        }
+        #game-over h2 { font-family: 'Playfair Display', serif; font-size: 28px; color: #fff; }
+        #game-over .go-score { font-size: 48px; font-weight: 700; color: var(--accent); }
+        #game-over p { color: var(--text-muted); font-size: 14px; }
 
         .btn-restart {
             font-family: var(--font);
@@ -236,14 +180,8 @@
             transition: opacity .2s, transform .15s;
             margin-top: 8px;
         }
-
-        .btn-restart:hover {
-            opacity: .85;
-        }
-
-        .btn-restart:active {
-            transform: scale(.97);
-        }
+        .btn-restart:hover { opacity: .85; }
+        .btn-restart:active { transform: scale(.97); }
 
         .btn-reset-inline {
             font-family: var(--font);
@@ -257,11 +195,7 @@
             transition: border-color .2s, color .2s;
             animation: fadeUp .6s .3s ease both;
         }
-
-        .btn-reset-inline:hover {
-            border-color: var(--accent2);
-            color: var(--accent2);
-        }
+        .btn-reset-inline:hover { border-color: var(--accent2); color: var(--accent2); }
 
         footer {
             margin-top: 36px;
@@ -271,27 +205,63 @@
             opacity: .6;
         }
 
-        @keyframes fadeDown {
-            from {
-                opacity: 0;
-                transform: translateY(-18px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
+        /* Start screen */
+        #start-screen {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+            background: var(--surface);
+            border: 1px solid var(--border);
+            border-radius: var(--radius);
+            padding: 44px 32px;
+            box-shadow: var(--shadow);
+            width: 100%;
+            max-width: 480px;
+            text-align: center;
+            animation: fadeUp .5s ease both;
         }
+        #start-screen .apple-icon { font-size: 56px; line-height: 1; }
+        #start-screen h2 { font-family: 'Playfair Display', serif; font-size: 24px; color: #fff; }
+        #start-screen p { font-size: 13px; color: var(--text-muted); line-height: 1.8; max-width: 320px; }
+        .rule-list {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 10px;
+            width: 100%;
+            text-align: left;
+        }
+        .rule-list li {
+            background: var(--surface2);
+            border-radius: 10px;
+            padding: 10px 14px;
+            font-size: 13px;
+            color: var(--text);
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .rule-list li span { font-size: 18px; }
+        .btn-start {
+            font-family: var(--font);
+            font-size: 16px;
+            font-weight: 700;
+            padding: 14px 48px;
+            border-radius: 100px;
+            border: none;
+            background: var(--accent);
+            color: #fff;
+            cursor: pointer;
+            transition: opacity .2s, transform .15s;
+            margin-top: 4px;
+            letter-spacing: .5px;
+        }
+        .btn-start:hover { opacity: .85; }
+        .btn-start:active { transform: scale(.97); }
 
-        @keyframes fadeUp {
-            from {
-                opacity: 0;
-                transform: translateY(18px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
+        @keyframes fadeDown { from { opacity:0; transform:translateY(-18px); } to { opacity:1; transform:translateY(0); } }
+        @keyframes fadeUp   { from { opacity:0; transform:translateY(18px);  } to { opacity:1; transform:translateY(0); } }
     </style>
 </head>
 <body>
@@ -307,7 +277,21 @@
     <h1>사과 게임</h1>
 </header>
 
-<div class="hud">
+<!-- Start screen -->
+<div id="start-screen">
+    <div class="apple-icon">🍎</div>
+    <h2>사과 게임</h2>
+    <p>드래그해서 합이 <strong style="color:var(--accent)">10</strong>이 되는 사과들을 선택하세요!</p>
+    <ul class="rule-list">
+        <li><span>🖱️</span> 마우스 또는 손가락으로 드래그</li>
+        <li><span>🔢</span> 합이 10이면 터짐</li>
+        <li><span>⏱️</span> 제한 시간 120초</li>
+        <li><span>🏆</span> 많이 터트릴수록 고득점!</li>
+    </ul>
+    <button class="btn-start" onclick="startGame()">시작하기</button>
+</div>
+
+<div class="hud" id="hud" style="display:none;">
     <div class="hud-stat">
         <span class="hud-label">점수</span>
         <span class="hud-val" id="score">0</span>
@@ -324,12 +308,10 @@
     </div>
 </div>
 
-<div class="timer-wrap">
-    <div id="timer-bar"></div>
-</div>
-<div id="msg">드래그해서 합이 10이 되는 사과를 선택하세요!</div>
+<div class="timer-wrap" id="timer-wrap" style="display:none;"><div id="timer-bar"></div></div>
+<div id="msg" style="display:none;"></div>
 
-<div class="board-wrap" id="board-wrap">
+<div class="board-wrap" id="board-wrap" style="display:none;">
     <canvas id="game-canvas"></canvas>
     <div id="sel-rect"></div>
 </div>
@@ -341,314 +323,310 @@
     <button class="btn-restart" onclick="initGame()">다시 시작</button>
 </div>
 
-<button class="btn-reset-inline" id="btn-reset" onclick="initGame()" style="margin-top:16px;">↺ 새 게임</button>
+<button class="btn-reset-inline" id="btn-reset" onclick="initGame()" style="margin-top:16px;display:none;">↺ 새 게임</button>
 
-<footer>합이 10이 되도록 드래그하세요 • 몇 개든 OK!</footer>
+<footer>합이 10이 되도록 드래그하세요</footer>
 
 <script>
-    const COLS = 17, ROWS = 10;
-    const TOTAL_TIME = 120;
+const COLS = 17, ROWS = 10;
+const TOTAL_TIME = 120;
 
-    let apples = [];
-    let score = 0;
-    let poppedCount = 0;
-    let timeLeft = TOTAL_TIME;
-    let timerInterval = null;
-    let gameActive = false;
+let apples = [];
+let score = 0;
+let poppedCount = 0;
+let timeLeft = TOTAL_TIME;
+let timerInterval = null;
+let gameActive = false;
 
-    /* canvas sizing */
-    const canvas = document.getElementById('game-canvas');
-    const ctx = canvas.getContext('2d');
-    let CELL, BOARD_W, BOARD_H;
+/* canvas sizing */
+const canvas = document.getElementById('game-canvas');
+const ctx = canvas.getContext('2d');
+let CELL, BOARD_W, BOARD_H;
 
-    function resize() {
-        const maxW = Math.min(window.innerWidth - 32, 680);
-        CELL = Math.floor(maxW / COLS);
-        BOARD_W = CELL * COLS;
-        BOARD_H = CELL * ROWS;
-        canvas.width = BOARD_W;
-        canvas.height = BOARD_H;
-        canvas.style.width = BOARD_W + 'px';
-        canvas.style.height = BOARD_H + 'px';
-        draw();
-    }
+function resize() {
+    const maxW = Math.min(window.innerWidth - 32, 680);
+    CELL = Math.floor(maxW / COLS);
+    BOARD_W = CELL * COLS;
+    BOARD_H = CELL * ROWS;
+    canvas.width = BOARD_W;
+    canvas.height = BOARD_H;
+    canvas.style.width = BOARD_W + 'px';
+    canvas.style.height = BOARD_H + 'px';
+    draw();
+}
 
-    window.addEventListener('resize', resize);
+window.addEventListener('resize', resize);
 
-    /* Apple colors by value */
-    const APPLE_COLORS = {
-        1: '#e84040', 2: '#e8634a', 3: '#e88040',
-        4: '#d4a017', 5: '#8ab825', 6: '#2aab6e',
-        7: '#2a9ab8', 8: '#4a7be8', 9: '#8a4ae8'
-    };
+/* Apple colors by value */
+const APPLE_COLORS = {
+    1: '#e84040', 2: '#e8634a', 3: '#e88040',
+    4: '#d4a017', 5: '#8ab825', 6: '#2aab6e',
+    7: '#2a9ab8', 8: '#4a7be8', 9: '#8a4ae8'
+};
 
-    /* ── init ── */
-    function initGame() {
-        clearInterval(timerInterval);
-        score = 0;
-        poppedCount = 0;
-        timeLeft = TOTAL_TIME;
-        gameActive = true;
-        isDragging = false;
-
-        document.getElementById('score').textContent = '0';
-        document.getElementById('time-left').textContent = TOTAL_TIME;
-        document.getElementById('popped').textContent = '0';
-        document.getElementById('timer-bar').style.width = '100%';
-        document.getElementById('timer-bar').style.background = 'var(--accent)';
-        document.getElementById('msg').textContent = '드래그해서 합이 10이 되는 사과를 선택하세요!';
-        document.getElementById('game-over').style.display = 'none';
-        document.getElementById('board-wrap').style.display = 'block';
-        document.getElementById('btn-reset').style.display = '';
-
-        apples = [];
-        for (let r = 0; r < ROWS; r++)
-            for (let c = 0; c < COLS; c++)
-                apples.push({r, c, val: Math.floor(Math.random() * 9) + 1, gone: false, pop: 0});
-
-        resize();
-
-        timerInterval = setInterval(() => {
-            timeLeft--;
-            document.getElementById('time-left').textContent = timeLeft;
-            const pct = timeLeft / TOTAL_TIME * 100;
-            document.getElementById('timer-bar').style.width = pct + '%';
-            if (pct < 20) document.getElementById('timer-bar').style.background = '#ff6b6b';
-            else if (pct < 50) document.getElementById('timer-bar').style.background = '#ff9f43';
-            else document.getElementById('timer-bar').style.background = 'var(--accent)';
-            if (timeLeft <= 0) endGame();
-        }, 1000);
-    }
-
-    /* ── draw ── */
-    function draw() {
-        ctx.clearRect(0, 0, BOARD_W, BOARD_H);
-
-        /* subtle grid */
-        ctx.strokeStyle = 'rgba(46,51,80,0.5)';
-        ctx.lineWidth = 0.5;
-        for (let r = 0; r <= ROWS; r++) {
-            ctx.beginPath();
-            ctx.moveTo(0, r * CELL);
-            ctx.lineTo(BOARD_W, r * CELL);
-            ctx.stroke();
-        }
-        for (let c = 0; c <= COLS; c++) {
-            ctx.beginPath();
-            ctx.moveTo(c * CELL, 0);
-            ctx.lineTo(c * CELL, BOARD_H);
-            ctx.stroke();
-        }
-
-        const now = performance.now();
-        apples.forEach(a => {
-            if (a.gone) return;
-
-            const cx = a.c * CELL + CELL / 2;
-            const cy = a.r * CELL + CELL / 2;
-            const r = CELL * 0.38;
-
-            /* pop animation */
-            let scale = 1;
-            if (a.pop > 0) {
-                const t = (now - a.pop) / 300;
-                scale = t < 0.5 ? 1 + t * 0.4 : Math.max(0, 1.2 - (t - 0.5) * 2.4);
-                if (scale <= 0) {
-                    a.gone = true;
-                    return;
-                }
-            }
-
-            /* highlight if selected */
-            const isSelected = selSet.has(a.r * COLS + a.c);
-
-            ctx.save();
-            ctx.translate(cx, cy);
-            ctx.scale(scale, scale);
-
-            /* glow if selected */
-            if (isSelected) {
-                ctx.shadowColor = '#5c7cfa';
-                ctx.shadowBlur = 14;
-            }
-
-            /* circle */
-            ctx.beginPath();
-            ctx.arc(0, 0, r, 0, Math.PI * 2);
-            ctx.fillStyle = isSelected ? lighten(APPLE_COLORS[a.val]) : APPLE_COLORS[a.val];
-            ctx.fill();
-
-            /* subtle inner highlight */
-            const grad = ctx.createRadialGradient(-r * 0.3, -r * 0.3, r * 0.05, 0, 0, r);
-            grad.addColorStop(0, 'rgba(255,255,255,0.25)');
-            grad.addColorStop(1, 'rgba(0,0,0,0.15)');
-            ctx.fillStyle = grad;
-            ctx.fill();
-
-            ctx.shadowBlur = 0;
-
-            /* number */
-            ctx.fillStyle = '#fff';
-            ctx.font = `bold ${Math.round(r * 1.1)}px 'Noto Sans KR', sans-serif`;
-            ctx.textAlign = 'center';
-            ctx.textBaseline = 'middle';
-            ctx.fillText(a.val, 0, 1);
-
-            ctx.restore();
-        });
-
-        /* selection rectangle */
-        if (isDragging) {
-            const rx = Math.min(dragStart.x, dragCur.x);
-            const ry = Math.min(dragStart.y, dragCur.y);
-            const rw = Math.abs(dragCur.x - dragStart.x);
-            const rh = Math.abs(dragCur.y - dragStart.y);
-            ctx.strokeStyle = 'rgba(92,124,250,0.9)';
-            ctx.lineWidth = 2;
-            ctx.setLineDash([6, 3]);
-            ctx.strokeRect(rx, ry, rw, rh);
-            ctx.fillStyle = 'rgba(92,124,250,0.08)';
-            ctx.fillRect(rx, ry, rw, rh);
-            ctx.setLineDash([]);
-        }
-
-        if (gameActive && apples.some(a => a.pop > 0)) requestAnimationFrame(draw);
-    }
-
-    function lighten(hex) {
-        const n = parseInt(hex.slice(1), 16);
-        const r = Math.min(255, (n >> 16) + 60);
-        const g = Math.min(255, ((n >> 8) & 0xff) + 60);
-        const b = Math.min(255, (n & 0xff) + 60);
-        return `rgb(${r},${g},${b})`;
-    }
-
-    /* ── Drag logic ── */
-    let isDragging = false;
-    let dragStart = {x: 0, y: 0};
-    let dragCur = {x: 0, y: 0};
-    let selSet = new Set();
-
-    function getPos(e) {
-        const rect = canvas.getBoundingClientRect();
-        const scaleX = canvas.width / rect.width;
-        const scaleY = canvas.height / rect.height;
-        const src = e.touches ? e.touches[0] : e;
-        return {
-            x: (src.clientX - rect.left) * scaleX,
-            y: (src.clientY - rect.top) * scaleY
-        };
-    }
-
-    function startDrag(e) {
-        if (!gameActive) return;
-        e.preventDefault();
-        isDragging = true;
-        dragStart = getPos(e);
-        dragCur = {...dragStart};
-        selSet = new Set();
-        updateSelection();
-        draw();
-    }
-
-    function moveDrag(e) {
-        if (!isDragging) return;
-        e.preventDefault();
-        dragCur = getPos(e);
-        updateSelection();
-        draw();
-    }
-
-    function endDrag(e) {
-        if (!isDragging) return;
-        e.preventDefault();
-        isDragging = false;
-        tryPop();
-        selSet = new Set();
-        draw();
-    }
-
-    function updateSelection() {
-        const rx1 = Math.min(dragStart.x, dragCur.x);
-        const rx2 = Math.max(dragStart.x, dragCur.x);
-        const ry1 = Math.min(dragStart.y, dragCur.y);
-        const ry2 = Math.max(dragStart.y, dragCur.y);
-
-        selSet = new Set();
-        apples.forEach(a => {
-            if (a.gone) return;
-            const cx = a.c * CELL + CELL / 2;
-            const cy = a.r * CELL + CELL / 2;
-            if (cx >= rx1 && cx <= rx2 && cy >= ry1 && cy <= ry2)
-                selSet.add(a.r * COLS + a.c);
-        });
-
-        /* live sum feedback */
-        const sel = apples.filter(a => !a.gone && selSet.has(a.r * COLS + a.c));
-        if (sel.length === 0) {
-            document.getElementById('msg').textContent = '드래그해서 합이 10이 되는 사과를 선택하세요!';
-            return;
-        }
-        const sum = sel.reduce((s, a) => s + a.val, 0);
-        if (sum === 10) {
-            document.getElementById('msg').textContent = `✨ 합계 ${sum} — 손을 떼면 터집니다!`;
-        } else if (sum < 10) {
-            document.getElementById('msg').textContent = `선택: ${sel.map(a => a.val).join(' + ')} = ${sum} (${10 - sum} 더 필요)`;
-        } else {
-            document.getElementById('msg').textContent = `선택: ${sum} — 10을 초과했어요!`;
-        }
-    }
-
-    function tryPop() {
-        const sel = apples.filter(a => !a.gone && selSet.has(a.r * COLS + a.c));
-        if (sel.length === 0) return;
-        const sum = sel.reduce((s, a) => s + a.val, 0);
-        if (sum === 10) {
-            const now = performance.now();
-            sel.forEach(a => {
-                a.pop = now;
-            });
-            score += sel.length * 10;
-            poppedCount += sel.length;
-            document.getElementById('score').textContent = score;
-            document.getElementById('popped').textContent = poppedCount;
-            document.getElementById('msg').textContent = `🍎 +${sel.length * 10}점! (${sel.map(a => a.val).join('+')}=10)`;
-            requestAnimationFrame(draw);
-
-            /* check if all gone */
-            setTimeout(() => {
-                const alive = apples.filter(a => !a.gone).length;
-                if (alive === 0) endGame();
-            }, 400);
-        } else {
-            document.getElementById('msg').textContent = `합계 ${sum} — 10이 아니에요!`;
-        }
-    }
-
-    /* ── events ── */
-    canvas.addEventListener('mousedown', startDrag);
-    canvas.addEventListener('mousemove', moveDrag);
-    canvas.addEventListener('mouseup', endDrag);
-    canvas.addEventListener('mouseleave', endDrag);
-
-    canvas.addEventListener('touchstart', startDrag, {passive: false});
-    canvas.addEventListener('touchmove', moveDrag, {passive: false});
-    canvas.addEventListener('touchend', endDrag, {passive: false});
-
-    /* ── end game ── */
-    function endGame() {
-        clearInterval(timerInterval);
-        gameActive = false;
-        isDragging = false;
-        draw();
-        document.getElementById('board-wrap').style.display = 'none';
-        document.getElementById('btn-reset').style.display = 'none';
-        document.getElementById('game-over').style.display = 'flex';
-        document.getElementById('go-score').textContent = score + '점';
-        document.getElementById('go-desc').textContent = `사과 ${poppedCount}개 터트림 • ${Math.round(poppedCount / COLS / ROWS * 100)}% 클리어`;
-    }
-
+/* ── start screen → game ── */
+function startGame() {
+    document.getElementById('start-screen').style.display = 'none';
+    document.getElementById('hud').style.display = 'flex';
+    document.getElementById('timer-wrap').style.display = 'block';
+    document.getElementById('msg').style.display = 'block';
+    document.getElementById('btn-reset').style.display = '';
     initGame();
-</script>
+}
+
+/* ── init ── */
+function initGame() {
+    clearInterval(timerInterval);
+    score = 0; poppedCount = 0; timeLeft = TOTAL_TIME;
+    gameActive = true;
+    isDragging = false;
+
+    document.getElementById('score').textContent = '0';
+    document.getElementById('time-left').textContent = TOTAL_TIME;
+    document.getElementById('popped').textContent = '0';
+    document.getElementById('timer-bar').style.width = '100%';
+    document.getElementById('timer-bar').style.background = 'var(--accent)';
+    document.getElementById('msg').textContent = '드래그해서 합이 10이 되는 사과를 선택하세요!';
+    document.getElementById('game-over').style.display = 'none';
+    document.getElementById('board-wrap').style.display = 'block';
+    document.getElementById('btn-reset').style.display = '';
+
+    apples = [];
+    for (let r = 0; r < ROWS; r++)
+        for (let c = 0; c < COLS; c++)
+            apples.push({ r, c, val: Math.floor(Math.random() * 9) + 1, gone: false, pop: 0 });
+
+    resize();
+
+    timerInterval = setInterval(() => {
+        timeLeft--;
+        document.getElementById('time-left').textContent = timeLeft;
+        const pct = timeLeft / TOTAL_TIME * 100;
+        document.getElementById('timer-bar').style.width = pct + '%';
+        if (pct < 20) document.getElementById('timer-bar').style.background = '#ff6b6b';
+        else if (pct < 50) document.getElementById('timer-bar').style.background = '#ff9f43';
+        else document.getElementById('timer-bar').style.background = 'var(--accent)';
+        if (timeLeft <= 0) endGame();
+    }, 1000);
+}
+
+/* ── draw ── */
+function draw() {
+    ctx.clearRect(0, 0, BOARD_W, BOARD_H);
+
+    /* subtle grid */
+    ctx.strokeStyle = 'rgba(46,51,80,0.5)';
+    ctx.lineWidth = 0.5;
+    for (let r = 0; r <= ROWS; r++) {
+        ctx.beginPath(); ctx.moveTo(0, r * CELL); ctx.lineTo(BOARD_W, r * CELL); ctx.stroke();
+    }
+    for (let c = 0; c <= COLS; c++) {
+        ctx.beginPath(); ctx.moveTo(c * CELL, 0); ctx.lineTo(c * CELL, BOARD_H); ctx.stroke();
+    }
+
+    const now = performance.now();
+    apples.forEach(a => {
+        if (a.gone) return;
+
+        const cx = a.c * CELL + CELL / 2;
+        const cy = a.r * CELL + CELL / 2;
+        const r = CELL * 0.38;
+
+        /* pop animation */
+        let scale = 1;
+        if (a.pop > 0) {
+            const t = (now - a.pop) / 300;
+            scale = t < 0.5 ? 1 + t * 0.4 : Math.max(0, 1.2 - (t - 0.5) * 2.4);
+            if (scale <= 0) { a.gone = true; return; }
+        }
+
+        /* highlight if selected */
+        const isSelected = selSet.has(a.r * COLS + a.c);
+
+        ctx.save();
+        ctx.translate(cx, cy);
+        ctx.scale(scale, scale);
+
+        /* glow if selected */
+        if (isSelected) {
+            ctx.shadowColor = '#5c7cfa';
+            ctx.shadowBlur = 14;
+        }
+
+        /* circle */
+        ctx.beginPath();
+        ctx.arc(0, 0, r, 0, Math.PI * 2);
+        ctx.fillStyle = isSelected ? lighten(APPLE_COLORS[a.val]) : APPLE_COLORS[a.val];
+        ctx.fill();
+
+        /* subtle inner highlight */
+        const grad = ctx.createRadialGradient(-r * 0.3, -r * 0.3, r * 0.05, 0, 0, r);
+        grad.addColorStop(0, 'rgba(255,255,255,0.25)');
+        grad.addColorStop(1, 'rgba(0,0,0,0.15)');
+        ctx.fillStyle = grad;
+        ctx.fill();
+
+        ctx.shadowBlur = 0;
+
+        /* number */
+        ctx.fillStyle = '#fff';
+        ctx.font = `bold ${Math.round(r * 1.1)}px 'Noto Sans KR', sans-serif`;
+        ctx.textAlign = 'center';
+        ctx.textBaseline = 'middle';
+        ctx.fillText(a.val, 0, 1);
+
+        ctx.restore();
+    });
+
+    /* selection rectangle */
+    if (isDragging) {
+        const rx = Math.min(dragStart.x, dragCur.x);
+        const ry = Math.min(dragStart.y, dragCur.y);
+        const rw = Math.abs(dragCur.x - dragStart.x);
+        const rh = Math.abs(dragCur.y - dragStart.y);
+        ctx.strokeStyle = 'rgba(92,124,250,0.9)';
+        ctx.lineWidth = 2;
+        ctx.setLineDash([6, 3]);
+        ctx.strokeRect(rx, ry, rw, rh);
+        ctx.fillStyle = 'rgba(92,124,250,0.08)';
+        ctx.fillRect(rx, ry, rw, rh);
+        ctx.setLineDash([]);
+    }
+
+    if (gameActive && apples.some(a => a.pop > 0)) requestAnimationFrame(draw);
+}
+
+function lighten(hex) {
+    const n = parseInt(hex.slice(1), 16);
+    const r = Math.min(255, (n >> 16) + 60);
+    const g = Math.min(255, ((n >> 8) & 0xff) + 60);
+    const b = Math.min(255, (n & 0xff) + 60);
+    return `rgb(${r},${g},${b})`;
+}
+
+/* ── Drag logic ── */
+let isDragging = false;
+let dragStart = { x: 0, y: 0 };
+let dragCur = { x: 0, y: 0 };
+let selSet = new Set();
+
+function getPos(e) {
+    const rect = canvas.getBoundingClientRect();
+    const scaleX = canvas.width / rect.width;
+    const scaleY = canvas.height / rect.height;
+    const src = e.touches ? e.touches[0] : e;
+    return {
+        x: (src.clientX - rect.left) * scaleX,
+        y: (src.clientY - rect.top) * scaleY
+    };
+}
+
+function startDrag(e) {
+    if (!gameActive) return;
+    e.preventDefault();
+    isDragging = true;
+    dragStart = getPos(e);
+    dragCur = { ...dragStart };
+    selSet = new Set();
+    updateSelection();
+    draw();
+}
+
+function moveDrag(e) {
+    if (!isDragging) return;
+    e.preventDefault();
+    dragCur = getPos(e);
+    updateSelection();
+    draw();
+}
+
+function endDrag(e) {
+    if (!isDragging) return;
+    e.preventDefault();
+    isDragging = false;
+    tryPop();
+    selSet = new Set();
+    draw();
+}
+
+function updateSelection() {
+    const rx1 = Math.min(dragStart.x, dragCur.x);
+    const rx2 = Math.max(dragStart.x, dragCur.x);
+    const ry1 = Math.min(dragStart.y, dragCur.y);
+    const ry2 = Math.max(dragStart.y, dragCur.y);
+
+    selSet = new Set();
+    apples.forEach(a => {
+        if (a.gone) return;
+        const cx = a.c * CELL + CELL / 2;
+        const cy = a.r * CELL + CELL / 2;
+        if (cx >= rx1 && cx <= rx2 && cy >= ry1 && cy <= ry2)
+            selSet.add(a.r * COLS + a.c);
+    });
+
+    /* live sum feedback */
+    const sel = apples.filter(a => !a.gone && selSet.has(a.r * COLS + a.c));
+    if (sel.length === 0) {
+        document.getElementById('msg').textContent = '드래그해서 합이 10이 되는 사과를 선택하세요!';
+        return;
+    }
+    const sum = sel.reduce((s, a) => s + a.val, 0);
+    if (sum === 10) {
+        document.getElementById('msg').textContent = `합계 ${sum} — 손을 떼면 터집니다!`;
+    } else if (sum < 10) {
+        document.getElementById('msg').textContent = `선택: ${sel.map(a => a.val).join(' + ')} = ${sum} (${10 - sum} 더 필요)`;
+    } else {
+        document.getElementById('msg').textContent = `선택: ${sel.map(a => a.val).join(' + ')} = ${sum} (${sum - 10} 초과)`;
+    }
+}
+
+function tryPop() {
+    const sel = apples.filter(a => !a.gone && selSet.has(a.r * COLS + a.c));
+    if (sel.length === 0) return;
+    const sum = sel.reduce((s, a) => s + a.val, 0);
+    if (sum === 10) {
+        const now = performance.now();
+        sel.forEach(a => { a.pop = now; });
+        score += sel.length * 10;
+        poppedCount += sel.length;
+        document.getElementById('score').textContent = score;
+        document.getElementById('popped').textContent = poppedCount;
+        document.getElementById('msg').textContent = `${sel.length * 10}점! (${sel.map(a=>a.val).join('+')}=10)`;
+        requestAnimationFrame(draw);
+
+        /* check if all gone */
+        setTimeout(() => {
+            const alive = apples.filter(a => !a.gone).length;
+            if (alive === 0) endGame();
+        }, 400);
+    } else {
+        document.getElementById('msg').textContent = `합계 ${sum} — 10이 아니에요!`;
+    }
+}
+
+/* ── events ── */
+canvas.addEventListener('mousedown', startDrag);
+canvas.addEventListener('mousemove', moveDrag);
+canvas.addEventListener('mouseup', endDrag);
+canvas.addEventListener('mouseleave', endDrag);
+
+canvas.addEventListener('touchstart', startDrag, { passive: false });
+canvas.addEventListener('touchmove', moveDrag, { passive: false });
+canvas.addEventListener('touchend', endDrag, { passive: false });
+
+/* ── end game ── */
+function endGame() {
+    clearInterval(timerInterval);
+    gameActive = false;
+    isDragging = false;
+    draw();
+    document.getElementById('board-wrap').style.display = 'none';
+    document.getElementById('btn-reset').style.display = 'none';
+    document.getElementById('game-over').style.display = 'flex';
+    document.getElementById('go-score').textContent = score + '점';
+    document.getElementById('go-desc').textContent = `사과 ${poppedCount}개 터트림 • ${Math.round(poppedCount/COLS/ROWS*100)}% 클리어`;
+}
+
+// game starts when user clicks 시작하기
 </body>
 </html>
