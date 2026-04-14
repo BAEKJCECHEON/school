@@ -391,12 +391,11 @@
         return new Date(Date.now() + 9 * 60 * 60 * 1000);
     }
 
-    function todayStr() {
-        const kst = kstDate();
-        return kst.getUTCFullYear() * 10000
-            + (kst.getUTCMonth() + 1) * 100
-            + kst.getUTCDate();
-    }
+function todayStr() {
+    const kst = kstDate();
+    // UTC 자정 기준 일수를 정수로 반환 (KST 자정 = UTC 전날 15:00)
+    return Math.floor(kst.getTime() / 86400000);
+}
 
     function todayLabel() {
         const kst = kstDate();
