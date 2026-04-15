@@ -392,9 +392,11 @@
     }
 
 function todayStr() {
-    const kst = kstDate();
-    // UTC 자정 기준 일수를 정수로 반환 (KST 자정 = UTC 전날 15:00)
-    return Math.floor(kst.getTime() / 86400000);
+    const kst = kstDate(); // UTC+9 보정된 Date
+    // getUTC* 메서드로 읽어야 KST 날짜가 정확히 나옴
+    return kst.getUTCFullYear() * 10000
+         + (kst.getUTCMonth() + 1) * 100
+         + kst.getUTCDate();
 }
 
     function todayLabel() {
