@@ -429,15 +429,21 @@ function generateFortune(name) {
     const seed = hashStr(name) ^ todayStr();
     const rng = seeded(seed);
 
-    const text = FORTUNES[Math.floor(rng() * FORTUNES.length)];
-
-    // 기준 점수 하나를 뽑고, 나머지는 ±15 범위 안에서 뽑기
-    const base = Math.floor(rng() * 71) + 20; // 20~90
+    const base = Math.floor(rng() * 71) + 20;
     const scores = SCORE_LABELS.map((_, i) => {
-        if (i === 0) return base; // 전체운 = 기준
-        const offset = Math.floor(rng() * 31) - 15; // -15 ~ +15
+        if (i === 0) return base;
+        const offset = Math.floor(rng() * 31) - 15;
         return Math.min(99, Math.max(10, base + offset));
     });
+
+    // 전체운 기준 tier 결정
+    const tier = base >= 70 ? '상' : base >= 50 ? '중' : '하';
+
+    // tier 맞는 것만 필터링 후 // 뒤 텍스트만 추출
+    const filtered = FORTUNES.filter(f => f.startsWith(tier + '//'));
+    const pool = filtered.length ? filtered : FORTUNES;
+    const raw = pool[Math.floor(rng() * pool.length)];
+    const text = raw.includes('//') ? raw.split('//')[1] : raw;
 
     return {
         text,
