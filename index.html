@@ -816,6 +816,15 @@
     </div>`;
     }
 
+    function filterLunch(items) {
+        if (!items) return [];
+        const start = items.indexOf('[중식]');
+        const end = items.indexOf('[석식]');
+        if (start === -1) return items; // [중식] 태그 없으면 전체 반환
+        const slice = end === -1 ? items.slice(start + 1) : items.slice(start + 1, end);
+        return slice;
+    }
+
     function renderMenu(el, items) {
         if (!items || items.length === 0) {
             el.innerHTML = `<p class="badge-empty">급식 정보 없음</p>`;
@@ -839,7 +848,7 @@
         el.innerHTML = skeleton();
         try {
             const data = await getJson(fileName);
-            renderMenu(el, data[key]);
+            renderMenu(el, filterLunch(data[key]));
         } catch {
             el.innerHTML = `<p class="badge-error">⚠️ 불러오기 실패</p>`;
         }
