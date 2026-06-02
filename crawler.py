@@ -7,12 +7,14 @@ YONGSO_URLS = {
     "03": "https://school.jbedu.kr/yongso/M01030404/list.do?ymd=20260331",
     "04": "https://school.jbedu.kr/yongso/M01030404/list.do?ymd=20260401",
     "05": "https://school.jbedu.kr/yongso/M01030404/list.do?ymd=20260501",
+    "06": "https://school.jbedu.kr/yongso/M01030404/list.do?ymd=20260601",
 }
 
 YOUNGGWANG_URLS = {
     "03": "https://school.jbedu.kr/higlory/M01060401/",
     "04": "https://school.jbedu.kr/higlory/M01060401/list?ymd=20260401",
     "05": "https://school.jbedu.kr/higlory/M01060401/list?ymd=20260501",
+    "06": "https://school.jbedu.kr/higlory/M01060401/list?ymd=20260601",
 }
 
 
